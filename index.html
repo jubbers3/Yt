@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yiaser Sk | Creative Developer</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            light: '#f8fafc',
+                            accent: '#2563eb', // Royal Blue
+                            code: '#ea580c',   // Orange for code
+                        }
+                    },
+                    animation: {
+                        'spin-slow': 'spin 10s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- CORE VISUALS --- */
+        body {
+            background-color: #f8fafc; /* White/Light Gray Background */
+            color: #0f172a;
+            overflow-x: hidden;
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 30px 30px; /* Grid Pattern */
+        }
+
+        /* --- 3D CUBE ANIMATION (PURE CSS) --- */
+        .scene {
+            width: 200px;
+            height: 200px;
+            perspective: 600px;
+        }
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 15s infinite linear;
+        }
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #2563eb;
+            line-height: 200px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2563eb;
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.2);
+            backface-visibility: visible;
+        }
+        
+        /* Positioning the faces */
+        .front  { transform: rotateY(0deg) translateZ(100px); }
+        .right  { transform: rotateY(90deg) translateZ(100px); }
+        .back   { transform: rotateY(180deg) translateZ(100px); }
+        .left   { transform: rotateY(-90deg) translateZ(100px); }
+        .top    { transform: rotateX(90deg) translateZ(100px); }
+        .bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+        @keyframes rotateCube {
+            from { transform: rotateX(-20deg) rotateY(0deg); }
+            to { transform: rotateX(-20deg) rotateY(360deg); }
+        }
+
+        /* --- CODE TERMINAL STYLES --- */
+        .terminal-window {
+            background: #1e293b; /* Dark bg for contrast code */
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            overflow: hidden;
+            font-family: 'Space Mono', monospace;
+            border: 1px solid #334155;
+        }
+        .terminal-header {
+            background: #0f172a;
+            padding: 10px 15px;
+            display: flex;
+            gap: 8px;
+            border-bottom: 1px solid #334155;
+        }
+        .dot { width: 12px; height: 12px; border-radius: 50%; }
+        .red { background: #ef4444; }
+        .yellow { background: #eab308; }
+        .green { background: #22c55e; }
+
+        /* --- UTILITIES --- */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        .text-stroke {
+            -webkit-text-stroke: 1px #0f172a;
+            color: transparent;
+        }
+        
+        /* Cursor */
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Selection Color */
+        ::selection {
+            background: #2563eb;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="fixed top-0 w-full z-50 glass-card">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-code text-blue-600 text-xl"></i>
+                <span class="font-mono font-bold text-lg tracking-tighter">Yiaser_Sk<span class="text-blue-600">.exe</span></span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-mono font-semibold text-gray-600">
+                <a href="#home" class="hover:text-blue-600 transition-colors">./HOME</a>
+                <a href="#about" class="hover:text-blue-600 transition-colors">./ABOUT</a>
+                <a href="#work" class="hover:text-blue-600 transition-colors">./WORK</a>
+            </div>
+            <a href="#contact" class="px-5 py-2 bg-black text-white font-mono text-xs rounded hover:bg-blue-600 transition-colors">
+                CONTACT_ME
+            </a>
+        </div>
+    </nav>
+
+    <section id="home" class="min-h-screen flex items-center pt-20 overflow-hidden relative">
+        <div class="absolute right-0 top-20 w-1/2 h-full bg-gradient-to-l from-blue-50 to-transparent -z-10"></div>
+
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
+            
+            <div class="space-y-6 z-10">
+                <div class="inline-block px-3 py-1 bg-blue-100 text-blue-700 font-mono text-xs font-bold rounded border border-blue-200">
+                    STATUS: AVAILABLE FOR HIRE
+                </div>
+                <h1 class="text-6xl md:text-8xl font-bold leading-none tracking-tight">
+                    HELLO,<br>
+                    I'M <span class="text-stroke">YIASER</span>
+                </h1>
+                <p class="font-mono text-gray-600 text-lg border-l-4 border-blue-600 pl-4">
+                    Class 9 Student <span class="text-blue-600 mx-2">//</span> WBBSE Board <br>
+                    Aspiring Software Engineer & Anime Artist.
+                </p>
+                
+                <div class="flex gap-4 pt-4">
+                    <button class="px-8 py-4 bg-blue-600 text-white font-mono font-bold rounded shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50 hover:-translate-y-1 transition-all">
+                        VIEW_PROJECTS()
+                    </button>
+                    <button class="px-8 py-4 bg-white border border-gray-300 text-gray-800 font-mono font-bold rounded hover:bg-gray-50 transition-all">
+                        DOWNLOAD_CV
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex flex-col items-center justify-center">
+                
+                <div class="scene mb-12 animate-float">
+                    <div class="cube">
+                        <div class="cube-face front bg-white/90">HTML5</div>
+                        <div class="cube-face back bg-white/90">CSS3</div>
+                        <div class="cube-face right bg-blue-50/90">PYTHON</div>
+                        <div class="cube-face left bg-blue-50/90">JS</div>
+                        <div class="cube-face top bg-white/90">ART</div>
+                        <div class="cube-face bottom bg-white/90">DESIGN</div>
+                    </div>
+                </div>
+
+                <div class="terminal-window w-full max-w-md shadow-2xl z-20 transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                    <div class="terminal-header">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                        <span class="text-gray-400 text-xs font-mono ml-2">main.py - yiaser@desktop</span>
+                    </div>
+                    <div class="p-4 text-xs md:text-sm text-green-400 font-mono h-48 overflow-y-hidden relative">
+                        <div id="code-typer"></div>
+                        <span class="cursor-blink inline-block w-2 h-4 bg-green-400 ml-1 align-middle"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-10 bg-white border-y border-gray-200">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="text-center">
+                <h3 class="text-3xl font-bold text-gray-900">14+</h3>
+                <p class="font-mono text-xs text-gray-500 mt-1">YEARS OLD</p>
+            </div>
+            <div class="text-center">
+                <h3 class="text-3xl font-bold text-gray-900">07</h3>
+                <p class="font-mono text-xs text-gray-500 mt-1">WORDS/DAY</p>
+            </div>
+            <div class="text-center">
+                <h3 class="text-3xl font-bold text-gray-900">10+</h3>
+                <p class="font-mono text-xs text-gray-500 mt-1">PROJECTS</p>
+            </div>
+            <div class="text-center">
+                <h3 class="text-3xl font-bold text-gray-900">LVL 9</h3>
+                <p class="font-mono text-xs text-gray-500 mt-1">STUDENT</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="work" class="py-20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <span class="font-mono text-blue-600 text-sm">/// PORTFOLIO</span>
+                    <h2 class="text-4xl font-bold mt-2">SELECTED WORKS</h2>
+                </div>
+                <a href="#" class="hidden md:block font-mono text-sm underline decoration-blue-500 underline-offset-4">VIEW GITHUB -></a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden relative">
+                        <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                        <i class="fa-solid fa-gamepad text-6xl text-gray-300 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Snake Game Logic</h3>
+                        <p class="text-gray-500 text-sm mb-4">A Python & JS based classic arcade game with optimized logic.</p>
+                        <div class="flex gap-2 font-mono text-xs">
+                            <span class="px-2 py-1 bg-gray-100 rounded">#PYTHON</span>
+                            <span class="px-2 py-1 bg-gray-100 rounded">#LOGIC</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden relative">
+                        <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                        <i class="fa-solid fa-cloud-sun text-6xl text-gray-300 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Weather App</h3>
+                        <p class="text-gray-500 text-sm mb-4">Real-time weather data fetching using modern APIs.</p>
+                        <div class="flex gap-2 font-mono text-xs">
+                            <span class="px-2 py-1 bg-gray-100 rounded">#API</span>
+                            <span class="px-2 py-1 bg-gray-100 rounded">#JSON</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-2xl hover:shadow-blue-500/20 transition-all duration-300">
+                    <div class="h-48 bg-gray-100 flex items-center justify-center overflow-hidden relative">
+                        <div class="absolute inset-0 bg-blue-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                        <i class="fa-brands fa-youtube text-6xl text-gray-300 group-hover:scale-110 transition-transform duration-300"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">DronilionTv</h3>
+                        <p class="text-gray-500 text-sm mb-4">Animation and tech tutorials content creation.</p>
+                        <div class="flex gap-2 font-mono text-xs">
+                            <span class="px-2 py-1 bg-gray-100 rounded">#MEDIA</span>
+                            <span class="px-2 py-1 bg-gray-100 rounded">#ART</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-900 text-white py-12 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-6 md:mb-0">
+                <h2 class="text-2xl font-bold font-mono">Yiaser Sk</h2>
+                <p class="text-gray-400 text-sm mt-2">Building the future, one line of code at a time.</p>
+            </div>
+            
+            <div class="flex gap-6">
+                <a href="https://instagram.com/DronilionTv" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-600 transition-colors">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-red-600 transition-colors">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+                <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </div>
+        </div>
+        <div class="text-center mt-12 text-gray-600 text-xs font-mono">
+            &copy; 2025 YIASER SK SYSTEM. ALL RIGHTS RESERVED.
+        </div>
+    </footer>
+
+    <script>
+        const codeElement = document.getElementById('code-typer');
+        // This is the code that will "type" itself on the screen
+        const codeLines = [
+            "class Yiaser:",
+            "  def __init__(self):",
+            "    self.name = 'Yiaser Sk'",
+            "    self.role = 'Student'",
+            "    self.skills = ['Python', 'HTML', 'Art']",
+            "",
+            "  def future_goal(self):",
+            "    return 'Software Engineer'",
+            "",
+            "print(Yiaser.future_goal())",
+            "# Output: Software Engineer"
+        ];
+
+        let lineIndex = 0;
+        let charIndex = 0;
+
+        function typeCode() {
+            if (lineIndex < codeLines.length) {
+                let currentLine = codeLines[lineIndex];
+                
+                if (charIndex < currentLine.length) {
+                    codeElement.innerHTML += currentLine.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeCode, Math.random() * 50 + 30); // Random typing speed
+                } else {
+                    codeElement.innerHTML += "<br>"; // New line
+                    lineIndex++;
+                    charIndex = 0;
+                    setTimeout(typeCode, 100);
+                }
+            } else {
+                // Reset to loop infinitely
+                setTimeout(() => {
+                    codeElement.innerHTML = "";
+                    lineIndex = 0;
+                    typeCode();
+                }, 3000);
+            }
+        }
+
+        // Start typing on load
+        document.addEventListener('DOMContentLoaded', typeCode);
+    </script>
+</body>
+</html>
